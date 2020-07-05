@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--连接数据库的jar-->
+    <classPathEntry
+            location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.43\mysql-connector-java-5.1.43.jar"/>
+    <!--    <classPathEntry-->
+    <!--            location="D://90 Workspace/maven/stone/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar"/>-->
+
+    <context id="MySql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+        <property name="mappers" value="com.example.manage.mapper.CommonMapper"/>
+        <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+        <property name="caseSensitive" value="true"/>
+    </plugin>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://101.132.33.149:3306/manage?useSSL=false"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+            targetPackage     指定生成的model生成所在的包名
+            targetProject     指定在该项目下所在的路径
+        -->
+        <javaModelGenerator targetPackage="com.example.manage.pojo" targetProject="src/main/java">
+            <!-- 是否对model添加 构造函数 -->
+            <!--<property name="constructorBased" value="true"/>-->
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+            <!-- 给Model添加一个父类 -->
+            <!--<property name="rootClass" value="com."/>-->
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="com.example.manage.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+
+        <table tableName="t_user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table tableName="t_role" domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="t_role_user_ship" domainObjectName="RoleUserShip">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <!-- 有些表的字段需要指定java类型
+         <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>
+
