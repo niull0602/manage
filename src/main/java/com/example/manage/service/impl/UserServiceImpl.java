@@ -87,7 +87,9 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(updataUserRequest, user);
         user.setUpdateTime(Instant.ofEpochSecond((Instant.now().getEpochSecond() - 25 * 60 * 60)));
-        roleUserShipDao.update(updataUserRequest.getRoleId(),updataUserRequest.getId());
+        if (updataUserRequest.getRoleId()!=null) {
+            roleUserShipDao.update(updataUserRequest.getRoleId(), updataUserRequest.getId());
+        }
         return userDao.updateUser(user);
     }
 

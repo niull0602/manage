@@ -6,11 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
-/**
- * @Auther: szp
- * @Date: 2020/1/6 21:20
- * @Description: 分页插件
- */
+
 @Configuration
 public class MybatisConfig {
     @Bean
